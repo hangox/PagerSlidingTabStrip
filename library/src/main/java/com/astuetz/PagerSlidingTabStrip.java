@@ -83,7 +83,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
     private int tabTextSizePx = 16;
     private int tabTextColor = 0xFF666666;
-    private int tabTextFocusColor = 0xFF666666;
+    private int tabTextFocusColor = 0xFF999999;
     private Typeface tabTypeface = null;
     private int tabTypefaceStyle = Typeface.NORMAL;
 
@@ -163,13 +163,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
     public void setViewPager(ViewPager pager) {
         this.pager = pager;
-
         if (pager.getAdapter() == null) {
             throw new IllegalStateException("ViewPager does not have adapter instance.");
         }
-
         pager.setOnPageChangeListener(pageListener);
-
         notifyDataSetChanged();
     }
 
@@ -343,33 +340,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
             if (delegatePageListener != null) {
                 delegatePageListener.onPageSelected(position);
             }
-
-//            if(tabUnfocus == null){
-//                tabUnfocus = ObjectAnimator.ofInt(this,
-//                        "textColor",
-//                        getTextColor(),
-//                        indicatorColor);
-//                tabUnfocus.setEvaluator(new ArgbEvaluator());
-//                tabUnfocus.setDuration(100);
-//                tabFocus = ObjectAnimator.ofInt(this,
-//                        "textColor",
-//                        indicatorColor,
-//                        getTextColor());
-//                tabFocus.setEvaluator(new ArgbEvaluator());
-//                tabFocus.setDuration(100);
-//                tabFocus.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//                    @Override
-//                    public void onAnimationUpdate(ValueAnimator animation) {
-//                        Log.i(TAG,animation.getAnimatedValue()+"");
-//                    }
-//                });
-//                tabUnfocus.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//                    @Override
-//                    public void onAnimationUpdate(ValueAnimator animation) {
-//                        Log.i(TAG,animation.getAnimatedValue()+"");
-//                    }
-//                });
-//            }
             View view = tabsContainer.getChildAt(position);
 
             if (mCurrentTab != null) {
@@ -392,7 +362,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
     public void setIndicatorColor(int indicatorColor) {
         this.indicatorColor = indicatorColor;
         invalidate();
-        updateTitle();
     }
 
     public void setIndicatorColorResource(int resId) {
@@ -493,7 +462,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
     public void setTabTextFocusColor(int tabTextFocusColor) {
         this.tabTextFocusColor = tabTextFocusColor;
-        updateTabStyles();
+        mCurrentTab.setTextColor(tabTextFocusColor);
     }
 
     public int getTabTextSizePx() {
