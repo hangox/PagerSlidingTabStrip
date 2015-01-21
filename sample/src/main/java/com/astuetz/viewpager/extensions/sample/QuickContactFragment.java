@@ -4,6 +4,9 @@ import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.Display;
@@ -36,7 +39,8 @@ public class QuickContactFragment extends DialogFragment {
 
 		tabs = (PagerSlidingTabStrip) root.findViewById(R.id.tabs);
 		pager = (ViewPager) root.findViewById(R.id.pager);
-
+        pager.setAdapter(new ContactsAdapter(getFragmentManager()));
+        tabs.setTabAdapter(new IconTabAdapter());
 		tabs.setViewPager(pager);
 
 		return root;
@@ -70,5 +74,22 @@ public class QuickContactFragment extends DialogFragment {
 			getDialog().getWindow().setLayout(w, h);
 		}
 	}
+
+    public class ContactsAdapter extends FragmentPagerAdapter{
+
+        public ContactsAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return SuperAwesomeCardFragment.newInstance(position);
+        }
+
+        @Override
+        public int getCount() {
+            return IconTabAdapter.iconIds.length;
+        }
+    }
 
 }

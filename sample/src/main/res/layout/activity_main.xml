@@ -7,12 +7,13 @@
     <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="34dip"
-        app:pstsTabPaddingLeftRight="8dp"
-        app:pstsShouldExpand="true"
+        android:layout_height="38dip"
+        app:pstsTabPaddingLeftRight="12dp"
+        app:pstsShouldExpand="false"
         app:pstsScrollOffset="4dp"
         app:pstsTextColor="#333"
         app:pstsFocusColor="#900"
+        app:pstsTextSize="16sp"
         app:pstsIndicatorColor="@color/test"
         android:background="@android:color/white" />
 
@@ -59,7 +60,7 @@
             android:layout_weight="1"
             android:background="#EB413D"
             android:onClick="onColorClicked"
-            android:tag="#FFC74B46" />
+            android:tag="#EB413D" />
 
         <ImageView
             android:layout_width="0dip"
